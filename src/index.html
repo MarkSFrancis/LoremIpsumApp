@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <link href="styles.css" rel="stylesheet">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="paragraph-count">Paragraph Count</label>
+            <input id="paragraph-count" value="1" type=number>
+        </div>
+        <a id="generate" onclick="generateLoremIpsum()" href="#">Generate Lorem Ipsum</a>
+        <p id="output">
+
+        </p>
+    </div>
+
+    <script src="node_modules/getlorem/lib/getlorem.js"></script>
+    <script>
+        function generateLoremIpsum() {
+            const numberToGet = document.getElementById('paragraph-count').value;
+
+            document.getElementById('output').innerHTML = window.getlorem.paragraphs(numberToGet, 'p', true);
+        };
+    </script>
+</body>
+
+</html>

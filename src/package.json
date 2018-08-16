@@ -1,0 +1,20 @@
+{
+  "name": "lorem-ipsum-app",
+  "version": "1.0.0",
+  "description": "Lorem Ipsum App for desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/marksfrancis/loremipsumapp"
+  },
+  "author": "MarkSFrancis",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^2.0.7",
+    "getlorem": "^1.0.1",
+    "jquery": "^3.3.1"
+  }
+}
