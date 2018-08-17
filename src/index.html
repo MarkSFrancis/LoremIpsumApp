@@ -1,29 +1,88 @@
 <html>
 
 <head>
-    <link href="styles.css" rel="stylesheet">
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel=stylesheet>
+    <link href="node_modules/toastr/build/toastr.min.css" rel=stylesheet>
+    <link href="styles.css" rel=stylesheet>
 </head>
 
 <body>
     <div class="container">
-        <div class="form-group">
-            <label for="paragraph-count">Paragraph Count</label>
-            <input id="paragraph-count" value="1" type=number>
-        </div>
-        <a id="generate" onclick="generateLoremIpsum()" href="#">Generate Lorem Ipsum</a>
-        <p id="output">
+        <form id="js-generate">
+            <div class="form-group">
+                <label for="paragraph-count">Paragraph Count</label>
+                <input class="form-control" id="paragraph-count" value="1" type=number>
+            </div>
+            <a class="btn btn-success" href="#" id="js-copy">Copy content to clipboard</a>
+        </form>
+        <hr>
+        <div id="js-output">
 
-        </p>
+        </div>
     </div>
 
-    <script src="node_modules/getlorem/lib/getlorem.js"></script>
     <script>
-        function generateLoremIpsum() {
-            const numberToGet = document.getElementById('paragraph-count').value;
+        const $ = require('jQuery');
+        const getlorem = require('getlorem');
+        const electron = require('electron');
+        const toastr = require('toastr');
 
-            document.getElementById('output').innerHTML = window.getlorem.paragraphs(numberToGet, 'p', true);
-        };
+        $(function () {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            const $paragraphCount = $('#paragraph-count');
+            const $output = $('#js-output');
+            const $copy = $('#js-copy')
+
+            let currentParagraphCount = 0;
+
+            $('#js-generate').submit(function () {
+                generateLoremIpsum();
+                return false;
+            });
+
+            function generateLoremIpsum() {
+                const numberToGet = $paragraphCount.val();
+
+                if (numberToGet === currentParagraphCount) {
+                    return;
+                }
+
+                const loremIpsum = window.getlorem.paragraphs(numberToGet, 'p', true);
+                $output.html(loremIpsum);
+
+                currentParagraphCount = numberToGet;
+            }
+
+            $paragraphCount.on('change paste keyup', function () {
+                generateLoremIpsum();
+            });
+
+            $copy.click(function () {
+                electron.ipcRenderer.send('copy-to-clipboard', $output.text());
+
+                toastr.success('Copied to clipboard', 'Copied');
+                return false;
+            });
+
+            generateLoremIpsum();
+        })
     </script>
 </body>
 
