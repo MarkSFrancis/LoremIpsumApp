@@ -24,7 +24,7 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ resizable: true, show: false, title: 'Lorem Ipsum Generator' });
+    mainWindow = new BrowserWindow({ resizable: true, show: false, title: 'Lorem Ipsum', icon: __dirname + '/code-icon.ico' });
 
     // mainWindow.setMenu(null)
 
