@@ -7,14 +7,12 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-const menu = electron.Menu.buildFromTemplate([
-    {
-        label: 'File',
-        submenu: [
-            { role: 'reload' }
-        ]
-    }
-]);
+const menu = electron.Menu.buildFromTemplate([{
+    label: 'File',
+    submenu: [{
+        role: 'reload'
+    }]
+}]);
 
 electron.Menu.setApplicationMenu(menu);
 
@@ -24,9 +22,14 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ resizable: true, show: false, title: 'Lorem Ipsum', icon: __dirname + '/code-icon.ico' });
+    mainWindow = new BrowserWindow({
+        resizable: true,
+        show: false,
+        title: 'Lorem Ipsum',
+        icon: __dirname + '/code-icon.ico'
+    });
 
-    // mainWindow.setMenu(null)
+    mainWindow.setMenu(null);
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
