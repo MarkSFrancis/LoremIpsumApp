@@ -11,7 +11,7 @@
         <form id="js-generate">
             <div class="form-group">
                 <label for="paragraph-count">Paragraph Count</label>
-                <input class="form-control" id="paragraph-count" value="1" type=number>
+                <input class="form-control" id="paragraph-count" value="1" min=0 type=number>
             </div>
             <a class="btn btn-success" href="#" id="js-copy">Copy content to clipboard</a>
         </form>
@@ -29,21 +29,21 @@
 
         $(function () {
             toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
+                closeButton: false,
+                debug: false,
+                newestOnTop: false,
+                progressBar: false,
+                positionClass: "toast-top-right",
+                preventDuplicates: false,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                timeOut: "5000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut"
             };
 
             const $paragraphCount = $('#paragraph-count');
