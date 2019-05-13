@@ -20,7 +20,7 @@
     "toastr": "^2.1.4"
   },
   "devDependencies": {
-    "electron": "^2.0.8",
-    "electron-packager": "^12.1.0"
+    "electron": "^2.0.18",
+    "electron-packager": "^12.2.0"
   }
 }
